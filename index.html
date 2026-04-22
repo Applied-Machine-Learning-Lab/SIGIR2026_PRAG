@@ -1,26 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="SIGIR 2026 tutorial homepage for Bridging Personalization and AI: From RAG to Agent.">
+  <meta name="keywords"
+        content="SIGIR 2026, tutorial, personalization, RAG, LLM agents, information retrieval">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  <title>Bridging Personalization and AI: From RAG to Agent</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -32,142 +19,343 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <style>
+    :root {
+      --accent: #0f766e;
+      --accent-soft: #dff5f2;
+      --accent-deep: #134e4a;
+      --gold: #b45309;
+      --ink: #1f2937;
+      --muted: #5b6472;
+      --line: #d9e2ec;
+      --panel: #ffffff;
+      --bg-top: #f7fbfa;
+      --bg-bottom: #fff9f0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(180, 83, 9, 0.10), transparent 28%),
+        linear-gradient(180deg, var(--bg-top) 0%, #ffffff 38%, var(--bg-bottom) 100%);
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(15, 118, 110, 0.10);
+    }
+
+    .navbar-item,
+    .navbar-link {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .page-tag {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      padding-top: 2rem;
+    }
+
+    .publication-title {
+      color: #102a43;
+      font-family: "Castoro", serif;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .publication-authors .author-block {
+      display: inline-block;
+      margin-right: 0.45rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1.75rem;
+    }
+
+    .meta-pill {
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(15, 118, 110, 0.14);
+      color: var(--accent-deep);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .feature-card,
+    .section-card {
+      height: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(15, 118, 110, 0.10);
+      border-radius: 24px;
+      box-shadow: 0 18px 48px rgba(16, 42, 67, 0.08);
+    }
+
+    .feature-card {
+      padding: 1.5rem;
+    }
+
+    .feature-card h2,
+    .section-card h2 {
+      color: #102a43;
+      font-family: "Castoro", serif;
+      margin-bottom: 0.85rem;
+    }
+
+    .feature-card ul,
+    .section-card ul {
+      margin-left: 1.2rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .section-card {
+      padding: 2rem;
+    }
+
+    .section-title {
+      color: #102a43;
+      font-family: "Castoro", serif;
+      margin-bottom: 1rem;
+    }
+
+    .section-card p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .section-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .structure-frame {
+      padding: 1rem;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #f5fffd 100%);
+      border: 1px solid var(--line);
+    }
+
+    .structure-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+    }
+
+    .figure-note {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .table-container {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(15, 118, 110, 0.12);
+      box-shadow: 0 18px 48px rgba(16, 42, 67, 0.08);
+    }
+
+    .schedule-table {
+      margin-bottom: 0;
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .schedule-table thead th {
+      background: #ecfdf5;
+      color: var(--accent-deep);
+      border-color: rgba(15, 118, 110, 0.12);
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .schedule-table td,
+    .schedule-table th {
+      border-color: rgba(15, 118, 110, 0.10);
+      vertical-align: top;
+    }
+
+    .schedule-table td:first-child {
+      white-space: nowrap;
+      font-weight: 700;
+      color: #102a43;
+      width: 11rem;
+    }
+
+    .schedule-table td:nth-child(2) {
+      font-weight: 700;
+      color: var(--accent-deep);
+      width: 19rem;
+    }
+
+    .audience-grid .section-card,
+    .resource-grid .section-card {
+      min-height: 100%;
+    }
+
+    .presenter-list {
+      margin-left: 1.2rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .presenter-list strong {
+      color: #102a43;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      text-align: center;
+      padding-bottom: 3rem;
+    }
+
+    .button.is-dark.is-rounded {
+      background: #102a43;
+    }
+
+    .button.is-link.is-light {
+      color: var(--accent-deep);
+      background: var(--accent-soft);
+    }
+
+    @media screen and (max-width: 768px) {
+      .hero {
+        padding-top: 1rem;
+      }
+
+      .section-card,
+      .feature-card {
+        padding: 1.35rem;
+      }
+
+      .schedule-table td:first-child,
+      .schedule-table td:nth-child(2) {
+        width: auto;
+        white-space: normal;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#top">
+        <strong>SIGIR 2026 Tutorial</strong>
       </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
 
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#overview">Overview</a>
+        <a class="navbar-item" href="#schedule">Schedule</a>
+        <a class="navbar-item" href="#audience">Audience</a>
+        <a class="navbar-item" href="#presenters">Presenters</a>
+      </div>
+    </div>
   </div>
 </nav>
 
-
-<section class="hero">
-  <div class="hero-body">
+<section class="hero" id="top">
+  <div class="hero-body" style="padding-top: 6rem;">
     <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
-          </div>
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column is-7">
+          <span class="page-tag">Proceedings of SIGIR '26</span>
+          <h1 class="title is-1 publication-title">Bridging Personalization and AI: From RAG to Agent</h1>
+          <p class="hero-copy">
+            A full-day tutorial on personalized Retrieval-Augmented Generation, user-adaptive retrieval,
+            memory-aware reasoning, and the evolution from RAG pipelines to personalized LLM-based agents.
+          </p>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
+            <span class="author-block">Pengyue Jia,</span>
+            <span class="author-block">Xiaopeng Li,</span>
+            <span class="author-block">Derong Xu,</span>
+            <span class="author-block">Yi Wen,</span>
+            <span class="author-block">Yingyi Zhang,</span>
+            <span class="author-block">Wenlin Zhang,</span>
+            <span class="author-block">Wanyu Wang,</span>
+            <span class="author-block">Yichao Wang,</span>
+            <span class="author-block">Yong Liu,</span>
+            <span class="author-block">Xiangyu Zhao</span>
           </div>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
-            </div>
+          <div class="is-size-6 publication-authors" style="color: var(--muted);">
+            <span class="author-block">City University of Hong Kong</span>
+            <span class="author-block">&bull;</span>
+            <span class="author-block">Huawei Noah's Ark Lab</span>
+          </div>
 
+          <div class="meta-row">
+            <span class="meta-pill">July 20-24, 2026</span>
+            <span class="meta-pill">Melbourne, VIC, Australia</span>
+            <span class="meta-pill">Full-Day Tutorial</span>
+          </div>
+
+          <div class="buttons">
+            <a href="https://github.com/Applied-Machine-Learning-Lab/Awesome-Personalized-RAG-Agent"
+               class="button is-dark is-rounded is-medium">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>GitHub Repository</span>
+            </a>
+            <a href="#schedule" class="button is-link is-light is-rounded is-medium">
+              <span>View Schedule</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="column is-5">
+          <div class="feature-card">
+            <h2 class="title is-4">At a Glance</h2>
+            <ul>
+              <li>A unified view of personalization across pre-retrieval, retrieval, and generation.</li>
+              <li>Direct connections between RAG stages and agent capabilities such as memory, planning, and tool use.</li>
+              <li>Coverage of datasets, evaluation metrics, privacy, robustness, and deployment trade-offs.</li>
+              <li>Practical resources, slides, and a continuously updated reading repository.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -175,316 +363,226 @@
   </div>
 </section>
 
-<section class="hero teaser">
+<section class="section" id="abstract">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
+    <div class="section-card">
+      <h2 class="title is-3 section-title">Abstract</h2>
+      <p>
+        Personalization is becoming a core capability of modern AI systems. It enables systems to adapt
+        their responses and behaviors according to individual users' preferences, contexts, and goals.
+        Recent research has focused on Retrieval-Augmented Generation (RAG) and its development toward
+        more advanced agent-based frameworks to improve user satisfaction in personalized settings.
+      </p>
+      <p>
+        In this tutorial, we provide a systematic overview of how personalization can be incorporated
+        into the three main stages of RAG: pre-retrieval, retrieval, and generation. We then extend the
+        discussion to personalized LLM-based agents, which build on RAG by adding agent capabilities such
+        as user understanding, personalized planning and execution, and adaptive response generation.
+      </p>
+      <p>
+        For both RAG-based and agent-based approaches, we present clear definitions, review recent research,
+        and summarize commonly used datasets and evaluation metrics. We also discuss key challenges, current
+        limitations, and promising future research directions.
+      </p>
     </div>
   </div>
 </section>
 
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <div class="columns is-variable is-6">
+      <div class="column is-7">
+        <div class="section-card">
+          <h2 class="title is-3 section-title">Tutorial Structure</h2>
+          <div class="structure-frame">
+            <img src="./static/images/structure.jpg"
+                 alt="Overview of the tutorial structure from personalized RAG to personalized agents">
+          </div>
+          <p class="figure-note">
+            The tutorial organizes personalization from the RAG pipeline into the broader agent workflow,
+            highlighting how user modeling, retrieval, generation, memory, planning, and execution fit into
+            one coherent framework.
+          </p>
+        </div>
+      </div>
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
+      <div class="column is-5">
+        <div class="section-card" style="margin-bottom: 1.5rem;">
+          <h2 class="title is-4 section-title">Learning Objectives</h2>
+          <ul>
+            <li>Understand the foundations of personalized RAG across pre-retrieval, retrieval, and generation.</li>
+            <li>Analyze how RAG components align with agent workflows such as user understanding, planning, execution, and response generation.</li>
+            <li>Identify key design trade-offs involving user modeling granularity, privacy, memory, efficiency, and robustness.</li>
+            <li>Explore emerging directions including continual personalization, multimodal personalization, and scalable deployment.</li>
+          </ul>
         </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
+
+        <div class="section-card">
+          <h2 class="title is-4 section-title">Materials and Resources</h2>
+          <p>
+            Slides, structured diagrams, unified formulations, and an annotated reading list will be made
+            publicly available through the tutorial repository.
+          </p>
+          <p>
+            Participants will also receive a curated bibliography of key papers, summaries of representative
+            datasets and evaluation benchmarks, and links to open-source implementations and related resources.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<section class="section" id="schedule">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title has-text-centered">Schedule</h2>
+    <div class="table-container">
+      <table class="table is-fullwidth schedule-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Session</th>
+            <th>Topics</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>09:00-09:20</td>
+            <td>Introduction to RAG and Agent</td>
+            <td>Overview of RAG, agentic RAG, and tutorial organization.</td>
+          </tr>
+          <tr>
+            <td>09:20-09:50</td>
+            <td>Personalization in RAG and Agents</td>
+            <td>Problem formulation and foundations of personalization.</td>
+          </tr>
+          <tr>
+            <td>09:50-10:30</td>
+            <td>Personalization in Pre-retrieval</td>
+            <td>Task formulation, query rewriting, and query expansion.</td>
+          </tr>
+          <tr>
+            <td>10:30-11:00</td>
+            <td>Coffee Break</td>
+            <td>Break.</td>
+          </tr>
+          <tr>
+            <td>11:00-11:50</td>
+            <td>Personalization in Retrieval</td>
+            <td>Task formulation, indexing, retrieval, and post-retrieval.</td>
+          </tr>
+          <tr>
+            <td>11:50-12:30</td>
+            <td>Personalization in Generation</td>
+            <td>Generation from explicit preferences and implicit preferences.</td>
+          </tr>
+          <tr>
+            <td>12:30-14:00</td>
+            <td>Coffee Break</td>
+            <td>Break.</td>
+          </tr>
+          <tr>
+            <td>14:00-15:00</td>
+            <td>From RAG to Agent</td>
+            <td>Relationship between RAG and agents, personalized understanding, planning, execution, and generation.</td>
+          </tr>
+          <tr>
+            <td>15:00-15:30</td>
+            <td>Evaluation and Datasets</td>
+            <td>Personalization evaluation metrics, datasets, and benchmarks.</td>
+          </tr>
+          <tr>
+            <td>15:30-16:00</td>
+            <td>Coffee Break</td>
+            <td>Break.</td>
+          </tr>
+          <tr>
+            <td>16:00-16:45</td>
+            <td>Challenges and Future Directions</td>
+            <td>Open problems, limitations, future opportunities, and conclusion.</td>
+          </tr>
+          <tr>
+            <td>16:45-17:30</td>
+            <td>Panel Discussion and Interactive Q&amp;A</td>
+            <td>Open research discussion, academic and industry perspectives, and audience questions.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="audience">
+  <div class="container is-max-desktop">
+    <div class="columns audience-grid is-variable is-6">
+      <div class="column is-6">
+        <div class="section-card">
+          <h2 class="title is-4 section-title">Target Audience</h2>
+          <p>
+            This tutorial is intended for researchers, practitioners, and AI enthusiasts who are exploring
+            personalization in RAG and agent-based systems.
+          </p>
+          <p>
+            It is particularly relevant to attendees working on information retrieval, recommender systems,
+            LLM applications, conversational AI, search, and interactive intelligent systems.
+          </p>
+        </div>
+      </div>
+
+      <div class="column is-6">
+        <div class="section-card">
+          <h2 class="title is-4 section-title">Prerequisites</h2>
+          <p>
+            Participants are expected to have a basic understanding of machine learning and information retrieval.
+          </p>
+          <p>
+            The material is structured to remain accessible to advanced undergraduate students while still being
+            useful for industry professionals and researchers seeking a deeper understanding of personalized RAG
+            and agentic systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="presenters">
+  <div class="container is-max-desktop">
+    <div class="section-card">
+      <h2 class="title is-3 section-title">Presenters</h2>
+      <ul class="presenter-list">
+        <li><strong>Pengyue Jia</strong> is a fourth-year PhD candidate at City University of Hong Kong, with publications at KDD, NeurIPS, AAAI, SIGIR, ACL, and WWW, and prior tutorial experience at IJCAI, WWW, and KDD.</li>
+        <li><strong>Xiaopeng Li</strong> is a fourth-year PhD candidate at City University of Hong Kong working on information retrieval, recommendation, personalized RAG, and LLM-based retrieval.</li>
+        <li><strong>Derong Xu</strong> is a joint PhD student at USTC and CityU whose research focuses on LLMs, knowledge graphs, and retrieval-augmented generation.</li>
+        <li><strong>Yi Wen</strong>, <strong>Yingyi Zhang</strong>, <strong>Wenlin Zhang</strong>, and <strong>Wanyu Wang</strong> contribute expertise in recommendation, personalized LLMs, RAG, and user modeling.</li>
+        <li><strong>Yichao Wang</strong> is a principal researcher at Huawei Noah's Ark Lab with extensive work on deep learning, RAG, personalized agents, and LLMs for recommendation.</li>
+        <li><strong>Yong Liu</strong> is an expert researcher at Huawei Noah's Ark Lab whose recent work spans LLM agents, RAG, and generative search and recommendation.</li>
+        <li><strong>Xiangyu Zhao</strong> is a tenured Associate Professor at City University of Hong Kong whose research focuses on personalization, information retrieval, machine learning, and large language models.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
+    <p class="footer-note">
+      Tutorial resources and updates: <a href="https://github.com/Applied-Machine-Learning-Lab/Awesome-Personalized-RAG-Agent">Applied-Machine-Learning-Lab/Awesome-Personalized-RAG-Agent</a>
+    </p>
   </div>
 </section>
 
-
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
-          </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Concurrent Work. -->
-
-  </div>
-</section>
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
-}</code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var burgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    burgers.forEach(function (el) {
+      el.addEventListener('click', function () {
+        var target = el.dataset.target;
+        var menu = document.getElementById(target);
+        el.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+  });
+</script>
 </body>
 </html>
